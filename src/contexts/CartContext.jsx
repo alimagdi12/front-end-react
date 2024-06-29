@@ -22,7 +22,7 @@ export const CartProvider = ({ children }) => {
   const getCart = async () => {
     try {
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/cart",
+        "https://portsaidrentals.onrender.com/api/v1/auth/cart",
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -42,7 +42,7 @@ export const CartProvider = ({ children }) => {
     try {
       ("Deleting item from cart...");
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/remove-from-cart",
+        "https://portsaidrentals.onrender.com/api/v1/auth/remove-from-cart",
         { cartId: id },
         {
           headers: {
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
         const token = localStorage.getItem("token");
         token;
         const response = await axios.post(
-          "http://https://portsaidrentals.onrender.com/api/v1/auth/add-to-cart",
+          "https://portsaidrentals.onrender.com/api/v1/auth/add-to-cart",
           productForm,
           {
             headers: {
@@ -93,7 +93,7 @@ export const CartProvider = ({ children }) => {
     if (token) {
       try {
         await axios.delete(
-          "http://https://portsaidrentals.onrender.com/api/v1/auth/delete-cart",
+          "https://portsaidrentals.onrender.com/api/v1/auth/delete-cart",
           {
             headers: {
               "Content-Type": "multipart/form-data",

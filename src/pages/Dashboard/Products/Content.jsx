@@ -24,7 +24,7 @@ const Content = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://https://portsaidrentals.onrender.com/api/v1/products/delete-product/${id}`,
+        `https://portsaidrentals.onrender.com/api/v1/products/delete-product/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

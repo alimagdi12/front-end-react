@@ -19,7 +19,7 @@ export const PostsProvider = ({ children }) => {
       // }
 
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/blogs",
+        "https://portsaidrentals.onrender.com/api/v1/auth/blogs",
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -47,7 +47,7 @@ export const PostsProvider = ({ children }) => {
       }
 
       await axios.delete(
-        `http://https://portsaidrentals.onrender.com/api/v1/auth/blogs/${postId}`,
+        `https://portsaidrentals.onrender.com/api/v1/auth/blogs/${postId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
       // }
 
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/get-user",
+        "https://portsaidrentals.onrender.com/api/v1/auth/get-user",
         {
           headers: {
             "Content-Type": "multipart/form-data",

@@ -10,7 +10,7 @@ export const ProductsProvider = ({ children }) => {
     setLoader(true);
     try {
       const response = await fetch(
-        "http://https://portsaidrentals.onrender.com/api/v1/products/get-products"
+        "https://portsaidrentals.onrender.com/api/v1/products/get-products"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch categories");

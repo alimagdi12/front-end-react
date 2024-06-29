@@ -27,7 +27,7 @@ const ProfileAvatar = () => {
   const handleImage = async () => {
     try {
       const response = await axios.put(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/edit-user-image",
+        "https://portsaidrentals.onrender.com/api/v1/auth/edit-user-image",
         userForm, // Pass userForm to the request
         {
           headers: {

@@ -48,7 +48,7 @@ const Categories = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://https://portsaidrentals.onrender.com/api/v1/admin/delete-category/${id}`,
+        `https://portsaidrentals.onrender.com/api/v1/admin/delete-category/${id}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -89,7 +89,7 @@ const Categories = () => {
 
     try {
       await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/admin/edit-category",
+        "https://portsaidrentals.onrender.com/api/v1/admin/edit-category",
         updateForm,
         {
           headers: {
@@ -120,7 +120,7 @@ const Categories = () => {
 
     try {
       await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/admin/add-category",
+        "https://portsaidrentals.onrender.com/api/v1/admin/add-category",
         addForm,
         {
           headers: {

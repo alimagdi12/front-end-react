@@ -161,7 +161,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   const handleNotificationDelete = async (index) => {
     try {
       const response = await axios.delete(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/delete-notification",
+        "https://portsaidrentals.onrender.com/api/v1/auth/delete-notification",
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -191,7 +191,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   const handleClearAllNotifications = async () => {
     try {
       const response = await axios.delete(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/clear-notifications",
+        "https://portsaidrentals.onrender.com/api/v1/auth/clear-notifications",
         {
           headers: {
             jwt: localStorage.getItem("token"),

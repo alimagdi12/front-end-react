@@ -21,7 +21,7 @@ const LoveProvider = ({ children }) => {
     // setLoading(true); // Start loading
     try {
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/favorites",
+        "https://portsaidrentals.onrender.com/api/v1/auth/favorites",
         {
           headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const LoveProvider = ({ children }) => {
       try {
         if (selectedLove?.includes(product._id)) {
           await axios.delete(
-            "http://https://portsaidrentals.onrender.com/api/v1/auth/remove-favorite",
+            "https://portsaidrentals.onrender.com/api/v1/auth/remove-favorite",
             {
               headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const LoveProvider = ({ children }) => {
           // await getFavorite()
         } else {
           const response = await axios.post(
-            "http://https://portsaidrentals.onrender.com/api/v1/auth/add-favorite",
+            "https://portsaidrentals.onrender.com/api/v1/auth/add-favorite",
             { productId: product._id },
             {
               headers: {

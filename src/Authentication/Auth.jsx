@@ -27,7 +27,7 @@ export default function Auth() {
     signInForm;
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/login",
+        "https://portsaidrentals.onrender.com/api/v1/auth/login",
         signInForm
       );
       if (response) {
@@ -57,7 +57,7 @@ export default function Auth() {
   const handleSignUp = async (signUpForm) => {
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/signup",
+        "https://portsaidrentals.onrender.com/api/v1/auth/signup",
         signUpForm
       );
       toast.success("Signed up successfully");

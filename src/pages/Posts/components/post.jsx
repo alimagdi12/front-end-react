@@ -49,7 +49,7 @@ const Post = ({ post }) => {
 
     try {
       await axios.post(
-        `http://https://portsaidrentals.onrender.com/api/v1/auth/blogs/${post._id}/comments`,
+        `https://portsaidrentals.onrender.com/api/v1/auth/blogs/${post._id}/comments`,
         comment,
         {
           headers: {
@@ -72,7 +72,7 @@ const Post = ({ post }) => {
   const fetchPostComments = async (post) => {
     try {
       const response = await axios.get(
-        `http://https://portsaidrentals.onrender.com/api/v1/comments/${post._id}`,
+        `https://portsaidrentals.onrender.com/api/v1/comments/${post._id}`,
         {
           headers: {
             "Content-Type": "application/json",

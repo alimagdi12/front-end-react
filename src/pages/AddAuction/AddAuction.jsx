@@ -151,7 +151,7 @@ export default function AddAuction() {
 
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/add-auction",
+        "https://portsaidrentals.onrender.com/api/v1/add-auction",
         productForm,
         {
           headers: {

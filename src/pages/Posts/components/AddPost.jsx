@@ -56,7 +56,7 @@ const AddPost = () => {
 
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/blogs",
+        "https://portsaidrentals.onrender.com/api/v1/auth/blogs",
         formData,
         {
           headers: {

@@ -20,7 +20,7 @@ export const OrderProvider = ({ children }) => {
   const getOrder = async () => {
     try {
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/all-orders",
+        "https://portsaidrentals.onrender.com/api/v1/auth/all-orders",
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -37,7 +37,7 @@ export const OrderProvider = ({ children }) => {
   const getUserOrders = async () => {
     try {
       const response = await axios.get(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/user-orders",
+        "https://portsaidrentals.onrender.com/api/v1/auth/user-orders",
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -65,7 +65,7 @@ export const OrderProvider = ({ children }) => {
       };
 
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/create-order",
+        "https://portsaidrentals.onrender.com/api/v1/auth/create-order",
         payload,
         {
           headers: {
@@ -86,7 +86,7 @@ export const OrderProvider = ({ children }) => {
   const deleteOrder = async (orderId) => {
     try {
       await axios.delete(
-        `http://https://portsaidrentals.onrender.com/api/v1/auth/order/${orderId}`,
+        `https://portsaidrentals.onrender.com/api/v1/auth/order/${orderId}`,
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -106,7 +106,7 @@ export const OrderProvider = ({ children }) => {
   const updateOrderStatus = async (orderId, status) => {
     try {
       const response = await axios.patch(
-        `http://https://portsaidrentals.onrender.com/api/v1/auth/order/${orderId}`,
+        `https://portsaidrentals.onrender.com/api/v1/auth/order/${orderId}`,
         { status: status },
         {
           headers: {

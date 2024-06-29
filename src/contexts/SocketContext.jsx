@@ -15,7 +15,7 @@ export const SocketProvider = ({ children }) => {
       return;
     }
 
-    const newSocket = io("http://https://portsaidrentals.onrender.com", {
+    const newSocket = io("https://portsaidrentals.onrender.com", {
       transports: ["websocket"],
       query: { jwt: token },
     });

@@ -67,7 +67,7 @@ const ProfileInfo1 = () => {
 
     try {
       await axios.put(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/edit-user",
+        "https://portsaidrentals.onrender.com/api/v1/auth/edit-user",
         userForm,
         {
           headers: {

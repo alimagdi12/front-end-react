@@ -8,7 +8,7 @@ export const ConversationProvider = ({ children }) => {
   const { userData } = useContext(UserContext);
   const [Conversations, setConversations] = useState([]);
 
-  const API_URL = "http://https://portsaidrentals.onrender.com/api/v1/auth";
+  const API_URL = "https://portsaidrentals.onrender.com/api/v1/auth";
 
   useEffect(() => {
     fetchConversations();
@@ -17,7 +17,7 @@ export const ConversationProvider = ({ children }) => {
   const fetchConversations = async () => {
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/conversation",
+        "https://portsaidrentals.onrender.com/api/v1/auth/conversation",
         { sender: userData?._id }
       );
       const x = await response.data;

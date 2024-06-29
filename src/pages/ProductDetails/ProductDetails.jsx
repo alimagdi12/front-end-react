@@ -38,7 +38,7 @@ export default function ProductDetails() {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://https://portsaidrentals.onrender.com/api/v1/products/get-product/${id}`,
+          `https://portsaidrentals.onrender.com/api/v1/products/get-product/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

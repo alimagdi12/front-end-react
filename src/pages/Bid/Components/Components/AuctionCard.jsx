@@ -64,7 +64,7 @@ export default function AuctionCard({
 
         try {
           const response = await axios.post(
-            "http://https://portsaidrentals.onrender.com/api/v1/auth/add-bid",
+            "https://portsaidrentals.onrender.com/api/v1/auth/add-bid",
             bidDetails,
             {
               headers: {

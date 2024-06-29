@@ -8,7 +8,7 @@ const NotificationProvider = ({ children }) => {
   const fetchNotifications = async () => {
     try {
       const response = await fetch(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/get-notification",
+        "https://portsaidrentals.onrender.com/api/v1/auth/get-notification",
         {
           headers: {
             "Content-Type": "multipart/form-data",

@@ -242,7 +242,7 @@ export default function AddProduct() {
 
       try {
         const response = await axios.post(
-          "http://https://portsaidrentals.onrender.com/api/v1/products/add-product",
+          "https://portsaidrentals.onrender.com/api/v1/products/add-product",
           productForm,
           {
             headers: {

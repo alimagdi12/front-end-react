@@ -25,7 +25,7 @@ const AllPosts = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://https://portsaidrentals.onrender.com/api/v1/auth/blogs/${id}`,
+        `https://portsaidrentals.onrender.com/api/v1/auth/blogs/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

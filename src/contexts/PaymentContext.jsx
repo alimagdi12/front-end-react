@@ -18,7 +18,7 @@ const PaymentProvider = ({ children }) => {
       const data = { name: Pname, totalPrice: price, cartItems, token: token };
 
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/payment",
+        "https://portsaidrentals.onrender.com/api/v1/auth/payment",
         data,
         {
           headers: {

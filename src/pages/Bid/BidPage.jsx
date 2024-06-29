@@ -37,7 +37,7 @@ const BidPage = () => {
     if (id) {
       try {
         const response = await axios.get(
-          `http://https://portsaidrentals.onrender.com/api/v1/get-heighst-bid/${id._id}`,
+          `https://portsaidrentals.onrender.com/api/v1/get-heighst-bid/${id._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const BidPage = () => {
   const fetchBid = async () => {
     try {
       const response = await axios.get(
-        `http://https://portsaidrentals.onrender.com/api/v1/get-auction-by-id/${id}`,
+        `https://portsaidrentals.onrender.com/api/v1/get-auction-by-id/${id}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",

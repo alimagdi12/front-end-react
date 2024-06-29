@@ -62,7 +62,7 @@ const Cart = () => {
     try {
       ("Deleting item from cart...");
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/remove-from-cart",
+        "https://portsaidrentals.onrender.com/api/v1/auth/remove-from-cart",
         { cartId: id },
         {
           headers: {

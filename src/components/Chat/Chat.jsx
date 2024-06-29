@@ -64,7 +64,7 @@ const Chat = () => {
   const getMessages = async () => {
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/usersMessages",
+        "https://portsaidrentals.onrender.com/api/v1/auth/usersMessages",
         { sender: userData?._id, receiver: id }
       );
 
@@ -86,7 +86,7 @@ const Chat = () => {
   const getConversations = async () => {
     try {
       const response = await axios.post(
-        "http://https://portsaidrentals.onrender.com/api/v1/auth/conversation",
+        "https://portsaidrentals.onrender.com/api/v1/auth/conversation",
         { sender: userData?._id }
       );
       const x = await response.data;
