@@ -15,54 +15,52 @@ import { NotificationContext } from "../contexts/NotificationContext";
 import LoaderContext from "../contexts/LoaderContext";
 
 export default function Auth() {
-  const {fetchNotifications, notifications} = useContext(NotificationContext)
-  const { color ,lightColor } = useContext(ColorContext);
+  const { fetchNotifications, notifications } = useContext(NotificationContext);
+  const { color, lightColor } = useContext(ColorContext);
   const navigate = useNavigate();
-const {setLoader} = useContext(LoaderContext)
+  const { setLoader } = useContext(LoaderContext);
   const { setToken } = useContext(UserContext);
-useEffect(()=>{
-  setLoader(false)
-},[])
+  useEffect(() => {
+    setLoader(false);
+  }, []);
   const handleSignIn = async (signInForm) => {
-    (signInForm);
+    signInForm;
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/v1/auth/login",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/login",
         signInForm
       );
       if (response) {
-        (response);
+        response;
         setToken(response.data.user.token.token);
-        (response.data.user.token.token);
+        response.data.user.token.token;
         localStorage.setItem("token", response.data.user.token.token);
-        toast.success('Logged in successfully');
-        if(response.data.user.token.user.role === "66423da09340e35f38c0f02d"){
-        localStorage.setItem('role' , 'admin')
-          navigate('/dashboard');
-        }
-        else{
-
-           navigate('/home');
+        toast.success("Logged in successfully");
+        if (response.data.user.token.user.role === "66423da09340e35f38c0f02d") {
+          localStorage.setItem("role", "admin");
+          navigate("/dashboard");
+        } else {
+          navigate("/home");
         }
         fetchNotifications();
       } else {
         // This block might never be reached because `response` is always truthy when the request is successful
-        toast.error('Log in failed');
+        toast.error("Log in failed");
         console.error("Token not found in response:", response);
       }
     } catch (error) {
-      toast.error('Log in failed'); // Add this line to ensure the toast is shown
+      toast.error("Log in failed"); // Add this line to ensure the toast is shown
       console.error("Signin failed:", error);
     }
-  };  
+  };
 
   const handleSignUp = async (signUpForm) => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/v1/auth/signup",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/signup",
         signUpForm
       );
-      toast.success('Signed up successfully');
+      toast.success("Signed up successfully");
       handleToLogin();
     } catch (error) {
       console.error("Signup failed:", error);
@@ -70,12 +68,12 @@ useEffect(()=>{
   };
 
   const [fade, setFade] = useState(false);
-  const [currentView, setCurrentView] = useState('login');
+  const [currentView, setCurrentView] = useState("login");
 
   const handleToLogin = () => {
     setFade(true);
     setTimeout(() => {
-      setCurrentView('login');
+      setCurrentView("login");
       setFade(false);
     }, 300);
   };
@@ -83,7 +81,7 @@ useEffect(()=>{
   const handleToRegister = () => {
     setFade(true);
     setTimeout(() => {
-      setCurrentView('register');
+      setCurrentView("register");
       setFade(false);
     }, 300);
   };
@@ -91,7 +89,7 @@ useEffect(()=>{
   const handleToForget = () => {
     setFade(true);
     setTimeout(() => {
-      setCurrentView('forget');
+      setCurrentView("forget");
       setFade(false);
     }, 300);
   };
@@ -99,7 +97,7 @@ useEffect(()=>{
   const handleToOtp = () => {
     setFade(true);
     setTimeout(() => {
-      setCurrentView('otp');
+      setCurrentView("otp");
       setFade(false);
     }, 300);
   };
@@ -107,83 +105,98 @@ useEffect(()=>{
   const handleToReset = () => {
     setFade(true);
     setTimeout(() => {
-      setCurrentView('reset');
+      setCurrentView("reset");
       setFade(false);
     }, 300);
   };
 
-
   return (
     <>
-    <Box sx={{ boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', width: {
-      xs: '100%',  
-      sm: '100%', 
-      md: '50%',   
-    },
-    height:{
-      xs: 'auto',  
-      sm: 'auto',  
-      md: 'auto',   
-    }}}  margin={'auto'} marginY={'5vh'} position={'relative'}>
-      <Box sx={{zIndex:'-1'}}  className={`clipped-element ${currentView === 'register' ? "move-bottom" : ""}`}>
-
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
-    <defs>
-      <style>
-        {`
+      <Box
+        sx={{
+          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+          width: {
+            xs: "100%",
+            sm: "100%",
+            md: "50%",
+          },
+          height: {
+            xs: "auto",
+            sm: "auto",
+            md: "auto",
+          },
+        }}
+        margin={"auto"}
+        marginY={"5vh"}
+        position={"relative"}
+      >
+        <Box
+          sx={{ zIndex: "-1" }}
+          className={`clipped-element ${
+            currentView === "register" ? "move-bottom" : ""
+          }`}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 270">
+            <defs>
+              <style>
+                {`
           .cls-1{fill:${lightColor};}
           .cls-2{fill:${color};}
         `}
-      </style>
-    </defs>
-    <title>Asset 2</title>
-    <g id="Layer_2" data-name="Layer 2">
-      <g id="visual">
-        <path className="cls-1" d="M0,0C27.9,22.3,55.8,44.5,89.2,54.7s72.2,8.4,101,25.1,47.6,52.1,59.2,86.9,16.1,69,20.6,103.3H0Z"/>
-        <path className="cls-2" d="M0,135c13.9,11.1,27.9,22.3,44.6,27.4s36.1,4.1,50.5,12.5,23.8,26,29.6,43.4,8.1,34.6,10.3,51.7H0Z"/>
-      </g>
-    </g>
-  </svg>
-
+              </style>
+            </defs>
+            <title>Asset 2</title>
+            <g id="Layer_2" data-name="Layer 2">
+              <g id="visual">
+                <path
+                  className="cls-1"
+                  d="M0,0C27.9,22.3,55.8,44.5,89.2,54.7s72.2,8.4,101,25.1,47.6,52.1,59.2,86.9,16.1,69,20.6,103.3H0Z"
+                />
+                <path
+                  className="cls-2"
+                  d="M0,135c13.9,11.1,27.9,22.3,44.6,27.4s36.1,4.1,50.5,12.5,23.8,26,29.6,43.4,8.1,34.6,10.3,51.7H0Z"
+                />
+              </g>
+            </g>
+          </svg>
+        </Box>
+        {currentView === "login" && (
+          <SignIn
+            fade={fade}
+            handleSignIn={handleSignIn}
+            handleToRegister={handleToRegister}
+            handleToForget={handleToForget}
+          />
+        )}
+        {currentView === "register" && (
+          <SignUp
+            fade={fade}
+            handleSignUp={handleSignUp}
+            handleToLogin={handleToLogin}
+          />
+        )}
+        {currentView === "forget" && (
+          <ForgetPassword
+            fade={fade}
+            handleToLogin={handleToLogin}
+            handleToOtp={handleToOtp}
+          />
+        )}
+        {currentView === "otp" && (
+          <CheckOTP
+            fade={fade}
+            handleToForget={handleToForget}
+            handleToReset={handleToReset}
+          />
+        )}
+        {currentView === "reset" && (
+          <ResetPassword
+            fade={fade}
+            handleToForget={handleToForget}
+            handleToLogin={handleToLogin}
+          />
+        )}
       </Box>
-      {currentView === 'login' && (
-        <SignIn 
-          fade={fade} 
-          handleSignIn={handleSignIn}
-          handleToRegister={handleToRegister}
-          handleToForget={handleToForget}
-        />
-      )}
-      {currentView === 'register' && (
-        <SignUp 
-          fade={fade} 
-          handleSignUp={handleSignUp}
-          handleToLogin={handleToLogin}
-        />
-      )}
-      {currentView === 'forget' && (
-        <ForgetPassword 
-          fade={fade}
-          handleToLogin={handleToLogin}
-          handleToOtp={handleToOtp}
-        />
-      )}
-      {currentView === 'otp' && (
-        <CheckOTP 
-          fade={fade}
-          handleToForget={handleToForget}
-          handleToReset={handleToReset}
-        />
-      )}
-      {currentView === 'reset' && (
-        <ResetPassword 
-          fade={fade}
-          handleToForget={handleToForget}
-          handleToLogin={handleToLogin}
-        />
-      )}
-    </Box>
     </>
-    
   );
 }

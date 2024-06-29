@@ -16,7 +16,7 @@ let socket;
 
 const BidPage = () => {
   const [highestBid, setHighestBid] = useState(2500);
-  const [highestBidderName, setHighestBidderName] = useState('');
+  const [highestBidderName, setHighestBidderName] = useState("");
   const [auction, setAuction] = useState({});
   const [bids, setBids] = useState([]);
 
@@ -24,20 +24,20 @@ const BidPage = () => {
   const { products } = useContext(ProductsContext);
   const { token } = useContext(UserContext);
   const { id } = useParams();
-  const {loader, setLoader} = useContext(LoaderContext)
-  const {notifications, fetchNotifications} = useContext(NotificationContext)
+  const { loader, setLoader } = useContext(LoaderContext);
+  const { notifications, fetchNotifications } = useContext(NotificationContext);
 
-  useEffect(()=>{
-    if(auction){
-      setLoader(false)
+  useEffect(() => {
+    if (auction) {
+      setLoader(false);
     }
-  },[])
+  }, []);
 
   const fetchHighestBidder = async (id) => {
     if (id) {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:3000/api/v1/get-heighst-bid/${id._id}`,
+          `http://https://portsaidrentals.onrender.com/api/v1/get-heighst-bid/${id._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -48,7 +48,9 @@ const BidPage = () => {
 
         const data = await response.data;
         setHighestBid(data.bid.amount);
-        setHighestBidderName(data.bid.biderId.firstName + ' ' + data.bid.biderId.lastName);
+        setHighestBidderName(
+          data.bid.biderId.firstName + " " + data.bid.biderId.lastName
+        );
       } catch (error) {
         console.error("Error fetching bid:", error);
       }
@@ -58,7 +60,7 @@ const BidPage = () => {
   const fetchBid = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/v1/get-auction-by-id/${id}`,
+        `http://https://portsaidrentals.onrender.com/api/v1/get-auction-by-id/${id}`,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -75,7 +77,7 @@ const BidPage = () => {
         auctionData.initialValue
       );
       setHighestBid(highestBidAmount);
-      fetchNotifications()
+      fetchNotifications();
 
       setTimeout(() => {
         fetchHighestBidder(auctionData);
@@ -100,17 +102,17 @@ const BidPage = () => {
       ("Connected to server");
     });
 
-    socket.on("newBid",async (message) => {
+    socket.on("newBid", async (message) => {
       if (message.id == id) {
         setHighestBid(message.highestBid);
         setHighestBidderName(message.highestBidder);
-        toast.error('somebody put a higher bid');
-        await fetchNotifications()
+        toast.error("somebody put a higher bid");
+        await fetchNotifications();
       }
     });
-    socket.on("notification", async(data) => {
+    socket.on("notification", async (data) => {
       toast.info(data.notification);
-      await fetchNotifications()
+      await fetchNotifications();
     });
 
     return () => {
@@ -119,18 +121,22 @@ const BidPage = () => {
   }, [socket]);
 
   const handleBid = (number) => {
-    socket.emit("newBid", { id: id, highestBid: number, highestBidder: (userData?.firstName + ' ' + userData?.lastName) });
+    socket.emit("newBid", {
+      id: id,
+      highestBid: number,
+      highestBidder: userData?.firstName + " " + userData?.lastName,
+    });
     setHighestBid(number);
-    setHighestBidderName(userData?.firstName + ' ' + userData?.lastName)
-    fetchNotifications()
+    setHighestBidderName(userData?.firstName + " " + userData?.lastName);
+    fetchNotifications();
   };
 
-  useEffect(()=>{
-    fetchNotifications()
-  },[notifications])
+  useEffect(() => {
+    fetchNotifications();
+  }, [notifications]);
 
   return (
-    <div style={{marginBottom:'5%'}}>
+    <div style={{ marginBottom: "5%" }}>
       <CssBaseline />
       <Container>
         <BidCard

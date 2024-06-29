@@ -1,23 +1,23 @@
-import React, { createContext, useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import UserContext from './UserContext';
+import React, { createContext, useEffect, useState, useContext } from "react";
+import axios from "axios";
+import UserContext from "./UserContext";
 
 export const ConversationContext = createContext();
 
 export const ConversationProvider = ({ children }) => {
-    const { userData } = useContext(UserContext);
-    const [Conversations, setConversations] = useState([]);
-    
-    const API_URL = 'http://127.0.0.1:3000/api/v1/auth';
+  const { userData } = useContext(UserContext);
+  const [Conversations, setConversations] = useState([]);
 
-    useEffect(() => {
-        fetchConversations();
-    }, []);
+  const API_URL = "http://https://portsaidrentals.onrender.com/api/v1/auth";
 
-    const fetchConversations = async () => {
-          try {
+  useEffect(() => {
+    fetchConversations();
+  }, []);
+
+  const fetchConversations = async () => {
+    try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/v1/auth/conversation",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/conversation",
         { sender: userData?._id }
       );
       const x = await response.data;
@@ -26,14 +26,13 @@ export const ConversationProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching chat history:", error);
     }
-    };
+  };
 
-
-    return (
-        <ConversationContext.Provider value={{ Conversations }}>
-            {children}
-        </ConversationContext.Provider>
-    );
+  return (
+    <ConversationContext.Provider value={{ Conversations }}>
+      {children}
+    </ConversationContext.Provider>
+  );
 };
 
 export default ConversationProvider;

@@ -1,33 +1,31 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import io from 'socket.io-client';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import io from "socket.io-client";
 
 const SocketContext = createContext();
 
 export const useSocket = () => useContext(SocketContext);
 
 export const SocketProvider = ({ children }) => {
-    const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            console.error('No token found, cannot establish socket connection');
-            return;
-        }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found, cannot establish socket connection");
+      return;
+    }
 
-        const newSocket = io('http://127.0.0.1:3000', {
-            transports: ['websocket'],
-            query: { jwt: token }
-        });
+    const newSocket = io("http://https://portsaidrentals.onrender.com", {
+      transports: ["websocket"],
+      query: { jwt: token },
+    });
 
-        setSocket(newSocket);
+    setSocket(newSocket);
 
-        return () => newSocket.close();
-    }, []);
+    return () => newSocket.close();
+  }, []);
 
-    return (
-        <SocketContext.Provider value={socket}>
-            {children}
-        </SocketContext.Provider>
-    );
+  return (
+    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+  );
 };

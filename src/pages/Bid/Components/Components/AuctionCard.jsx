@@ -11,7 +11,17 @@ import { toast } from "react-toastify";
 import ColorContext from "../../../../contexts/ColorContext";
 import { NotificationContext } from "../../../../contexts/NotificationContext";
 
-export default function AuctionCard({ highestBid, highestBidderName, socketBid, hours, minutes, seconds, id, auction, setHighestBid }) {
+export default function AuctionCard({
+  highestBid,
+  highestBidderName,
+  socketBid,
+  hours,
+  minutes,
+  seconds,
+  id,
+  auction,
+  setHighestBid,
+}) {
   const { color } = useContext(ColorContext);
   const [expired, setExpired] = useState(false);
   const [bidderName, setBidderName] = useState("");
@@ -19,11 +29,11 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
   const [bidAmount, setBidAmount] = useState("");
   const [confirmBid, setConfirmBid] = useState(false);
   const { token } = useContext(UserContext);
-  const {notifications, fetchNotifications} = useContext(NotificationContext)
+  const { notifications, fetchNotifications } = useContext(NotificationContext);
 
-  useEffect(()=>{
-    fetchNotifications()
-  },[notifications])
+  useEffect(() => {
+    fetchNotifications();
+  }, [notifications]);
 
   useEffect(() => {
     if (seconds < 0 || minutes < 0 || hours < 0) {
@@ -41,7 +51,7 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
 
   const confirmBidHandler = async () => {
     if (bidAmount <= highestBid) {
-      toast.error('You must place a higher bid.');
+      toast.error("You must place a higher bid.");
     } else {
       if (token) {
         const bidAmountNumber = parseInt(bidAmount);
@@ -54,7 +64,7 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
 
         try {
           const response = await axios.post(
-            "http://127.0.0.1:3000/api/v1/auth/add-bid",
+            "http://https://portsaidrentals.onrender.com/api/v1/auth/add-bid",
             bidDetails,
             {
               headers: {
@@ -65,7 +75,7 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
           );
 
           if (response.data && response.data.msg) {
-            (response.data.msg);
+            response.data.msg;
           } else {
             setHighestBid(bidAmountNumber);
             setBidderName("Your Name"); // Update this with actual bidder's name logic
@@ -77,9 +87,9 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
         setBidAmount("");
         socketBid(bidAmountNumber);
         setConfirmBid(false);
-        fetchNotifications()
+        fetchNotifications();
       } else {
-        toast.error('You must login first');
+        toast.error("You must login first");
       }
     }
   };
@@ -111,7 +121,8 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
     return () => clearInterval(timer);
   }, []);
 
-  const totalSeconds = progress.hours * 3600 + progress.minutes * 60 + progress.seconds;
+  const totalSeconds =
+    progress.hours * 3600 + progress.minutes * 60 + progress.seconds;
   const progressValue = ((12 * 3600 - totalSeconds) / (12 * 3600)) * 100;
 
   return (
@@ -166,13 +177,16 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
               display="flex"
               alignItems="center"
               mt={2}
-              sx={{ width: { xs: "100%", sm: "70%" }, justifyContent: "center" }}
+              sx={{
+                width: { xs: "100%", sm: "70%" },
+                justifyContent: "center",
+              }}
             >
               <Button
                 sx={{
                   width: "100%",
                   backgroundColor: color,
-                  "&:hover": { backgroundColor: color }
+                  "&:hover": { backgroundColor: color },
                 }}
                 variant="contained"
                 color="primary"
@@ -188,7 +202,16 @@ export default function AuctionCard({ highestBid, highestBidderName, socketBid, 
   );
 }
 
-function CircularProgressWithLabel({ auction, highestBidderName, highestBid, value, hours, minutes, seconds, expired }) {
+function CircularProgressWithLabel({
+  auction,
+  highestBidderName,
+  highestBid,
+  value,
+  hours,
+  minutes,
+  seconds,
+  expired,
+}) {
   const { color } = useContext(ColorContext);
 
   return (
@@ -199,9 +222,10 @@ function CircularProgressWithLabel({ auction, highestBidderName, highestBid, val
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height:'50vh',
+        height: "50vh",
         borderRadius: "50%",
-        padding:'0px', margin:'10px'
+        padding: "0px",
+        margin: "10px",
       }}
     >
       {!expired && (
@@ -219,7 +243,7 @@ function CircularProgressWithLabel({ auction, highestBidderName, highestBid, val
               },
               color: "#E9EEF1",
               position: "absolute",
-              margin:'10px'
+              margin: "10px",
             }}
             thickness={2}
             strokeLinecap={"round"}

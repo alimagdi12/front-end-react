@@ -24,7 +24,7 @@ const Chat = () => {
   const { setLoader } = useContext(LoaderContext);
   const navigate = useNavigate();
 
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   // Initialize socket connection
   useEffect(() => {
@@ -34,8 +34,7 @@ const Chat = () => {
       },
     });
 
-    socket.on("connect", () => {
-     });
+    socket.on("connect", () => {});
 
     socket.on("chat message", (message) => {
       if (
@@ -50,7 +49,7 @@ const Chat = () => {
       } else {
         getConversations();
       }
-     });
+    });
 
     // Cleanup on component unmount
     return () => {
@@ -65,7 +64,7 @@ const Chat = () => {
   const getMessages = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/v1/auth/usersMessages",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/usersMessages",
         { sender: userData?._id, receiver: id }
       );
 
@@ -87,7 +86,7 @@ const Chat = () => {
   const getConversations = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/v1/auth/conversation",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/conversation",
         { sender: userData?._id }
       );
       const x = await response.data;
@@ -138,7 +137,7 @@ const Chat = () => {
         display: "flex",
         flexDirection: isSmallScreen ? "column" : "row",
         width: "100%",
-         height: "100vh",
+        height: "100vh",
         position: "relative",
       }}
     >

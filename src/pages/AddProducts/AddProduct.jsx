@@ -1,23 +1,34 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
-import CustomSelect from '../AddAuction/Components/CustomSelect';
-import CategoryContext from '../../contexts/CategoriesContext';
-import UserContext from '../../contexts/UserContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import ColorContext from '../../contexts/ColorContext';
-import styled from 'styled-components';
-import LoaderContext from '../../contexts/LoaderContext';
+import React, { useContext, useState, useEffect } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
+import CustomSelect from "../AddAuction/Components/CustomSelect";
+import CategoryContext from "../../contexts/CategoriesContext";
+import UserContext from "../../contexts/UserContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import ColorContext from "../../contexts/ColorContext";
+import styled from "styled-components";
+import LoaderContext from "../../contexts/LoaderContext";
 import "./AddProduct.css";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function AddProduct() {
   const { color, lightColor } = useContext(ColorContext);
   const navigate = useNavigate();
   const { categories } = useContext(CategoryContext);
   const { token } = useContext(UserContext);
-  const catgs = categories?.categories?.map(({ _id, title }) => ({ value: _id, label: title })) || [];
-  const {loader, setLoader} = useContext(LoaderContext)
+  const catgs =
+    categories?.categories?.map(({ _id, title }) => ({
+      value: _id,
+      label: title,
+    })) || [];
+  const { loader, setLoader } = useContext(LoaderContext);
 
   const StyledSpan = styled.span`
     width: 100px;
@@ -56,15 +67,31 @@ export default function AddProduct() {
     }
 
     @keyframes slide {
-      0%, 100% { bottom: -35px }
-      25%, 75% { bottom: -2px }
-      20%, 80% { bottom: 2px }
+      0%,
+      100% {
+        bottom: -35px;
+      }
+      25%,
+      75% {
+        bottom: -2px;
+      }
+      20%,
+      80% {
+        bottom: 2px;
+      }
     }
 
     @keyframes rotate {
-      0% { transform: rotate(-15deg) }
-      25%, 75% { transform: rotate(0deg) }
-      100% { transform: rotate(25deg) }
+      0% {
+        transform: rotate(-15deg);
+      }
+      25%,
+      75% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(25deg);
+      }
     }
   `;
 
@@ -75,16 +102,16 @@ export default function AddProduct() {
   }, []);
 
   const [formData, setFormData] = useState({
-    title: '',
-    name: '',
-    location: '',
+    title: "",
+    name: "",
+    location: "",
     images: [],
-    quantity: '',
-    productStatus: '',
-    categoryId: '',
-    price: '',
-    productDetails: '',
-    userId: '6643d585dd8c6b0c1065f2b5',
+    quantity: "",
+    productStatus: "",
+    categoryId: "",
+    price: "",
+    productDetails: "",
+    userId: "6643d585dd8c6b0c1065f2b5",
   });
 
   const [errors, setErrors] = useState({});
@@ -95,41 +122,52 @@ export default function AddProduct() {
 
     const validateField = (name, value) => {
       switch (name) {
-        case 'title':
+        case "title":
           tempErrors.title = value ? "" : "This field is required.";
-          if (value && value.length < 3) tempErrors.title = "Title must be at least 3 characters long.";
+          if (value && value.length < 3)
+            tempErrors.title = "Title must be at least 3 characters long.";
           break;
-        case 'price':
+        case "price":
           tempErrors.price = value ? "" : "This field is required.";
-          if (value && isNaN(value)) tempErrors.price = "Price must be a number.";
-          if (value && value <= 0) tempErrors.price = "Price must be greater than 0.";
+          if (value && isNaN(value))
+            tempErrors.price = "Price must be a number.";
+          if (value && value <= 0)
+            tempErrors.price = "Price must be greater than 0.";
           break;
-        case 'quantity':
+        case "quantity":
           tempErrors.quantity = value ? "" : "This field is required.";
-          if (value && isNaN(value)) tempErrors.quantity = "Quantity must be a number.";
-          if (value && value <= 0) tempErrors.quantity = "Quantity must be greater than 0.";
+          if (value && isNaN(value))
+            tempErrors.quantity = "Quantity must be a number.";
+          if (value && value <= 0)
+            tempErrors.quantity = "Quantity must be greater than 0.";
           break;
-        case 'productDetails':
+        case "productDetails":
           tempErrors.productDetails = value ? "" : "This field is required.";
-          if (value && value.length < 3) tempErrors.productDetails = "product details must be at least 3 characters long.";
+          if (value && value.length < 3)
+            tempErrors.productDetails =
+              "product details must be at least 3 characters long.";
           break;
-        case 'location':
+        case "location":
           tempErrors.location = value ? "" : "This field is required.";
-          if (value && value.length < 5) tempErrors.location = "Location must be at least 5 characters long.";
+          if (value && value.length < 5)
+            tempErrors.location =
+              "Location must be at least 5 characters long.";
           break;
-        case 'productStatus':
+        case "productStatus":
           tempErrors.productStatus = value ? "" : "This field is required.";
           break;
-        case 'categoryId':
+        case "categoryId":
           tempErrors.categoryId = value ? "" : "This field is required.";
           break;
-        case 'images':
-          tempErrors.images = formData.images.length > 0 ? "" : "This field is required.";
+        case "images":
+          tempErrors.images =
+            formData.images.length > 0 ? "" : "This field is required.";
           if (formData.images.length > 0) {
-            const validFormats = ['image/jpeg', 'image/png', 'image/gif'];
-            formData.images.forEach(image => {
+            const validFormats = ["image/jpeg", "image/png", "image/gif"];
+            formData.images.forEach((image) => {
               if (!validFormats.includes(image.type)) {
-                tempErrors.images = "Only JPEG, PNG, and GIF formats are allowed.";
+                tempErrors.images =
+                  "Only JPEG, PNG, and GIF formats are allowed.";
               }
             });
           }
@@ -138,12 +176,13 @@ export default function AddProduct() {
           break;
       }
     };
-    
 
     if (field) {
       validateField(field, formData[field]);
     } else {
-      Object.keys(formData).forEach(name => validateField(name, formData[name]));
+      Object.keys(formData).forEach((name) =>
+        validateField(name, formData[name])
+      );
     }
 
     setErrors(tempErrors);
@@ -151,7 +190,7 @@ export default function AddProduct() {
     if (field) {
       return tempErrors[field] === "";
     } else {
-      return Object.values(tempErrors).every(x => x === "");
+      return Object.values(tempErrors).every((x) => x === "");
     }
   };
 
@@ -159,7 +198,7 @@ export default function AddProduct() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -167,7 +206,7 @@ export default function AddProduct() {
     const { name } = e.target;
     setTouched({
       ...touched,
-      [name]: true
+      [name]: true,
     });
     validate(name);
   };
@@ -176,76 +215,92 @@ export default function AddProduct() {
     const files = Array.from(e.target.files);
     setFormData({
       ...formData,
-      images: files
+      images: files,
     });
     setTouched({
       ...touched,
-      images: true
+      images: true,
     });
-    validate('images');
+    validate("images");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       const productForm = new FormData();
-      productForm.append('title', formData.title);
-      productForm.append('categoryId', formData.categoryId);
-      productForm.append('quantity', formData.quantity);  // Ensure quantity is appended
-      productForm.append('location', formData.location);
-      productForm.append('price', formData.price);
-      productForm.append('productStatus', formData.productStatus);
-      productForm.append('productDetails', formData.productDetails);
-      productForm.append('userId', formData.userId);
+      productForm.append("title", formData.title);
+      productForm.append("categoryId", formData.categoryId);
+      productForm.append("quantity", formData.quantity); // Ensure quantity is appended
+      productForm.append("location", formData.location);
+      productForm.append("price", formData.price);
+      productForm.append("productStatus", formData.productStatus);
+      productForm.append("productDetails", formData.productDetails);
+      productForm.append("userId", formData.userId);
       formData.images.forEach((image) => {
-        productForm.append('images', image);
+        productForm.append("images", image);
       });
 
       try {
-        const response = await axios.post('http://127.0.0.1:3000/api/v1/products/add-product', productForm, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'jwt': localStorage.getItem('token')
+        const response = await axios.post(
+          "http://https://portsaidrentals.onrender.com/api/v1/products/add-product",
+          productForm,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              jwt: localStorage.getItem("token"),
+            },
           }
-        });
+        );
         setFormData({
-          title: '',
-          name: '',
-          location: '',
+          title: "",
+          name: "",
+          location: "",
           images: [],
-          quantity: '',
-          productStatus: '',
-          categoryId: '',
-          price: '',
-          productDetails: '',
-          userId: '6643d585dd8c6b0c1065f2b5',
+          quantity: "",
+          productStatus: "",
+          categoryId: "",
+          price: "",
+          productDetails: "",
+          userId: "6643d585dd8c6b0c1065f2b5",
         });
-        navigate('/products');
+        navigate("/products");
         window.location.reload();
       } catch (err) {
-        console.error('Error adding product:', err.response ? err.response.data : err);
-        toast.error('failed to add product')
+        console.error(
+          "Error adding product:",
+          err.response ? err.response.data : err
+        );
+        toast.error("failed to add product");
       }
-    }
-    else{
-      toast.error('failed to add product')
+    } else {
+      toast.error("failed to add product");
     }
   };
 
   return (
-    <Container style={{ marginBottom: '5%' }}>
+    <Container style={{ marginBottom: "5%" }}>
       <form onSubmit={handleSubmit}>
-        <label style={{ display: "flex", justifyContent: 'flex-start', alignItems: 'center' }}>
+        <label
+          style={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        >
           <StyledSpan />
-          <Typography sx={{ fontWeight: 'bold', fontSize: '20px' }}>Upload Images</Typography>
+          <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
+            Upload Images
+          </Typography>
           <input
             type="file"
             name="images"
             multiple
             onChange={handleImageChange}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
-          {touched.images &&  <Typography color="error">{errors.images}</Typography>}
+          {touched.images && (
+            <Typography color="error">{errors.images}</Typography>
+          )}
         </label>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -304,10 +359,19 @@ export default function AddProduct() {
               helperText={touched.productDetails && errors.productDetails}
             />
           </Grid>
-          <Grid item sx={{ display: 'flex', paddingTop: '16px', '@media(max-width:600px)':{
-            flexDirection: 'column',
-          } }} xs={12} sm={12}>
-            <Grid item xs={12} sm={6} >
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              paddingTop: "16px",
+              "@media(max-width:600px)": {
+                flexDirection: "column",
+              },
+            }}
+            xs={12}
+            sm={12}
+          >
+            <Grid item xs={12} sm={6}>
               <Typography variant="h6">Location</Typography>
               <TextField
                 name="location"
@@ -323,11 +387,33 @@ export default function AddProduct() {
                 helperText={touched.location && errors.location}
               />
             </Grid>
-            <Grid sx={{ display: 'flex', flexDirection: 'column', width: '50%' , '@media(max-width:600px)':{
-              width: '100%',
-            }}}>
-              <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                <Grid item xs={12} sm={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: "50%",
+                "@media(max-width:600px)": {
+                  width: "100%",
+                },
+              }}
+            >
+              <Grid
+                item
+                xs={12}
+                md={12}
+                sx={{ display: "flex", justifyContent: "space-evenly" }}
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={2}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100%",
+                  }}
+                >
                   <Typography variant="h6">Status</Typography>
                   <CustomSelect
                     width={130}
@@ -336,14 +422,27 @@ export default function AddProduct() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     options={[
-                      { value: 'used', label: 'Used' },
-                      { value: 'new', label: 'New' },
+                      { value: "used", label: "Used" },
+                      { value: "new", label: "New" },
                     ]}
                     sx={{ mt: 1 }}
                   />
-                  {touched.productStatus && errors.productStatus && <Typography color="error">{errors.productStatus}</Typography>}
+                  {touched.productStatus && errors.productStatus && (
+                    <Typography color="error">
+                      {errors.productStatus}
+                    </Typography>
+                  )}
                 </Grid>
-                <Grid item xs={12} sm={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={2}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
                   <Typography variant="h6">Category</Typography>
                   <CustomSelect
                     width={130}
@@ -354,27 +453,38 @@ export default function AddProduct() {
                     options={catgs}
                     sx={{ mt: 1 }}
                   />
-                  {touched.categoryId && errors.categoryId && <Typography color="error">{errors.categoryId}</Typography>}
+                  {touched.categoryId && errors.categoryId && (
+                    <Typography color="error">{errors.categoryId}</Typography>
+                  )}
                 </Grid>
               </Grid>
-              <Grid item xs={12} sm={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <Button
                   type="submit"
                   variant="contained"
                   sx={{
-                    width:'60%',
+                    width: "60%",
                     backgroundColor: color,
-                    color: '#ffffff',
-                    '&:hover': {
-                      backgroundColor: '#fff',
+                    color: "#ffffff",
+                    "&:hover": {
+                      backgroundColor: "#fff",
                       color: color,
                       outline: `2px solid ${color}`,
                     },
-                    '@media (max-width: 600px)': { 
-                      width:'80%'
+                    "@media (max-width: 600px)": {
+                      width: "80%",
                     },
-                    '@media (max-width: 1440px)': { 
-                      width:'60%'
+                    "@media (max-width: 1440px)": {
+                      width: "60%",
                     },
                   }}
                 >

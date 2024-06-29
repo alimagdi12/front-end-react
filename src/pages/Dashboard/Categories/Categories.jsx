@@ -45,18 +45,23 @@ const Categories = () => {
   const [newCategoryImage, setNewCategoryImage] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
- 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:3000/api/v1/admin/delete-category/${id}`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          jwt: localStorage.getItem("token"),
-        },
-      });
+      await axios.delete(
+        `http://https://portsaidrentals.onrender.com/api/v1/admin/delete-category/${id}`,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            jwt: localStorage.getItem("token"),
+          },
+        }
+      );
       fetchCategories();
     } catch (err) {
-      console.error("Error deleting category:", err.response ? err.response.data : err);
+      console.error(
+        "Error deleting category:",
+        err.response ? err.response.data : err
+      );
     }
   };
 
@@ -83,16 +88,23 @@ const Categories = () => {
     }
 
     try {
-      await axios.post("http://127.0.0.1:3000/api/v1/admin/edit-category", updateForm, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          jwt: localStorage.getItem("token"),
-        },
-      });
+      await axios.post(
+        "http://https://portsaidrentals.onrender.com/api/v1/admin/edit-category",
+        updateForm,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            jwt: localStorage.getItem("token"),
+          },
+        }
+      );
       fetchCategories();
       handleClose();
     } catch (err) {
-      console.error("Error updating category:", err.response ? err.response.data : err);
+      console.error(
+        "Error updating category:",
+        err.response ? err.response.data : err
+      );
     }
   };
 
@@ -107,16 +119,23 @@ const Categories = () => {
     addForm.append("images", newCategoryImage);
 
     try {
-      await axios.post("http://127.0.0.1:3000/api/v1/admin/add-category", addForm, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          jwt: localStorage.getItem("token"),
-        },
-      });
+      await axios.post(
+        "http://https://portsaidrentals.onrender.com/api/v1/admin/add-category",
+        addForm,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            jwt: localStorage.getItem("token"),
+          },
+        }
+      );
       fetchCategories();
       handleClose();
     } catch (err) {
-      console.error("Error adding category:", err.response ? err.response.data : err);
+      console.error(
+        "Error adding category:",
+        err.response ? err.response.data : err
+      );
     }
   };
 
@@ -126,28 +145,55 @@ const Categories = () => {
   };
 
   return (
-    <Box sx={{ height: "auto", flexGrow: 1, padding: "16px", backgroundColor: "#fff", color: "#fff" }}>
+    <Box
+      sx={{
+        height: "auto",
+        flexGrow: 1,
+        padding: "16px",
+        backgroundColor: "#fff",
+        color: "#fff",
+      }}
+    >
       <Typography variant="h5" gutterBottom sx={{ color: "#fff" }}>
         Top Categories
       </Typography>
       <Grid container spacing={2}>
         {categories.categories.map((category) => (
           <Grid item xs={12} sm={6} md={4} key={category.id}>
-            <Card sx={{ backgroundColor: "#fff", padding: '5px', border: `1px solid ${color}`, color: color }}>
+            <Card
+              sx={{
+                backgroundColor: "#fff",
+                padding: "5px",
+                border: `1px solid ${color}`,
+                color: color,
+              }}
+            >
               <CardMedia
                 component="img"
                 height="140"
                 image={category.imageUrl.images[0]}
                 alt={category.title}
-                sx={{ height: '250px' }}
+                sx={{ height: "250px" }}
               />
               <CardContent>
                 <Typography variant="h6">{category.title}</Typography>
-                <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "8px" }}>
-                  <IconButton onClick={() => handleDelete(category._id)} color="error">
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "8px",
+                  }}
+                >
+                  <IconButton
+                    onClick={() => handleDelete(category._id)}
+                    color="error"
+                  >
                     <AutoDeleteIcon />
                   </IconButton>
-                  <IconButton onClick={() => handleEditClick(category)} color="primary">
+                  <IconButton
+                    onClick={() => handleEditClick(category)}
+                    color="primary"
+                  >
                     <EditIcon />
                   </IconButton>
                 </Box>
@@ -157,7 +203,11 @@ const Categories = () => {
         ))}
       </Grid>
 
-      <Dialog open={dialogOpen} onClose={handleClose} PaperProps={{ sx: { backgroundColor: "#333340", color: "#fff" } }}>
+      <Dialog
+        open={dialogOpen}
+        onClose={handleClose}
+        PaperProps={{ sx: { backgroundColor: "#333340", color: "#fff" } }}
+      >
         <DialogTitle>
           {isAdding ? "Add New Category" : "Edit Category"}
         </DialogTitle>
@@ -181,7 +231,10 @@ const Categories = () => {
           />
         </DialogContent>
         <DialogActions>
-          <GradientButton variant="contained" onClick={isAdding ? handleAddCategory : handleUpdate}>
+          <GradientButton
+            variant="contained"
+            onClick={isAdding ? handleAddCategory : handleUpdate}
+          >
             {isAdding ? "Add" : "Save"}
           </GradientButton>
           <Button onClick={handleClose} color="secondary">

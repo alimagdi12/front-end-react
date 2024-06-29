@@ -41,14 +41,15 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 export default function Navbar({ darkMode, toggleDarkMode }) {
   const location = useLocation();
   const currentPath = location.pathname;
- const{Conversations} = useContext(ConversationContext)
+  const { Conversations } = useContext(ConversationContext);
   const { id } = useParams();
   const { love, getFavorite } = useContext(LoveContext);
   const { userData, token, fetchUserData, setToken } = useContext(UserContext);
   const { categories } = useContext(CategoryContext);
   const { totalItems, cartItems, getCart } = useContext(CartContext);
-  const { notifications = [], fetchNotifications } = useContext(NotificationContext);
-    const [anchorElNav, setAnchorElNav] = useState(null);
+  const { notifications = [], fetchNotifications } =
+    useContext(NotificationContext);
+  const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [hoveredPage, setHoveredPage] = useState(null);
   const [anchorElNotifications, setAnchorElNotifications] = useState(null);
@@ -93,7 +94,6 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
     userData;
     getFavorite();
     getCart();
-   
   }, []);
 
   useEffect(() => {
@@ -161,7 +161,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   const handleNotificationDelete = async (index) => {
     try {
       const response = await axios.delete(
-        "http://127.0.0.1:3000/api/v1/auth/delete-notification",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/delete-notification",
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -172,7 +172,6 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
         }
       );
 
-     
       setShowDone((prevShowDone) => {
         const updatedShowDone = [...prevShowDone];
         updatedShowDone[index] = true;
@@ -192,7 +191,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
   const handleClearAllNotifications = async () => {
     try {
       const response = await axios.delete(
-        "http://127.0.0.1:3000/api/v1/auth/clear-notifications",
+        "http://https://portsaidrentals.onrender.com/api/v1/auth/clear-notifications",
         {
           headers: {
             jwt: localStorage.getItem("token"),
@@ -300,16 +299,17 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                   </Typography>
                 </Link>
               </MenuItem>
-            {categories &&
-  categories.categories &&
-  categories.categories.map((category) => (
-    <Link to={`/products/${category._id}`} key={category._id} style={{ textDecoration: 'none', color: 'inherit' }}>
-      <FlipCard category={category}>
-        {category.title}
-      </FlipCard>
-    </Link>
-  ))}
-
+              {categories &&
+                categories.categories &&
+                categories.categories.map((category) => (
+                  <Link
+                    to={`/products/${category._id}`}
+                    key={category._id}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <FlipCard category={category}>{category.title}</FlipCard>
+                  </Link>
+                ))}
             </Menu>
           </Box>
 
@@ -368,7 +368,9 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                   textDecoration: "none",
                 }}
                 // component={Link}
-                onClick={()=>{handleNavigate('/categories')}}
+                onClick={() => {
+                  handleNavigate("/categories");
+                }}
                 className="text-decoration-none h5 mx-2"
               >
                 <Link
@@ -418,22 +420,6 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
               )}
             </Box>
           </Box>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           {!token && (
             <Box sx={{ my: 2, textAlign: "center", position: "relative" }}>
